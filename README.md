@@ -6,7 +6,7 @@ IRC, or Internet Relay Chat, is a real-time messaging protocol that enables comm
 <img src='https://github.com/Niimphu/ft_irc/blob/main/screen.png' width='600'>
 
 ## Overview
-In this project, we are tasked with developing an IRC server that works with a specific "reference client". For our server, we chose to use [HexChat](https://hexchat.github.io/), and configured our parser and replies to follow [https://modern.ircdocs.horse/#part-message]("modern IRC protocol").
+In this project, we are tasked with developing an IRC server in C++98 standard that works with a specific "reference client". For our server, we chose to use [HexChat](https://hexchat.github.io/), and configured our parser and replies to follow ["modern IRC protocol"](https://modern.ircdocs.horse/#part-message).
 
 The subject brief specifies that, as well as handling a certain set of commands, the server should also:
  - use one call to poll()
