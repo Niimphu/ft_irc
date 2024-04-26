@@ -14,6 +14,8 @@ The subject brief specifies that, as well as handling a certain set of commands,
  - only have non-block I/O
  - use TCP/IP server-client connections
 
+For the project, we developed an IRC server that can be started from terminal with `./ircserv <port> <password>`, and then from there, it handles all incoming requests from HexChat.
+
 
 ## Available commands:
 
