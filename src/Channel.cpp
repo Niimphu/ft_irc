@@ -40,8 +40,6 @@ void	Channel::removeOperator(const std::string& name)
 		{
 			_operators.erase(it);
 			--_userCount;
-			if (DEBUG)
-				std::cout << "removed " << name << " from " << _name << std::endl;
 			return ;
 		}
 	}
@@ -65,8 +63,6 @@ void	Channel::removeClient(const std::string& name)
 		{
 			_clients.erase(it);
 			--_userCount;
-			if (DEBUG)
-				std::cout << "removed " << name << " from " << _name << std::endl;
 			return ;
 		}
 	}

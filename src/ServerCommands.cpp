@@ -91,7 +91,6 @@ void	Server::names(Client& client, std::string& channelName)
 int	Server::channelTopic(const std::string& channelName,const std::string& newTopic, Client& client)
 {
 	std::string	name = client.getNickname();
-	std::cout <<"this is "<< newTopic << std::endl;
 	if (channelName.empty())
 		return (sendToClient(buildReply(SERVER, client.getNickname(), 461, "", 1, "PRIVMSG"), client));
 
@@ -138,7 +137,7 @@ int	Server::quit(Client& client, std::string& quitMessage)
 			close(client.getSocket());
 			_fds.erase(_fds.begin() + std::distance(_clients.begin(), it) + 1);
 			_clients.erase(it);
-			std::cout << nickname << " has quit" << std::endl;
+			std::cout << GREEN << nickname << " has quit" << RESET << std::endl;
 			break;
 		}
 	}

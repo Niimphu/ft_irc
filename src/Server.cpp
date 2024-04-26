@@ -24,11 +24,6 @@ void	Server::start()
 	signal(SIGINT, signalHandler);
 	signal(SIGQUIT, signalHandler);
 
-	if (DEBUG)
-	{
-		std::cout << GREEN << "Server started, on socket " << _socket << RESET << std::endl;
-		std::cout <<  GREEN "\tListening on port " << _port << RESET <<  std::endl;
-	}
 	while (_running)
 	{
 		if (poll(&_fds[0], _fds.size(), -1) == -1 && _running)
@@ -102,8 +97,6 @@ int Server::acceptSocket()
 
 	_clients.push_back(newClient);
 	_fds.push_back(newClientFD);
-	if (DEBUG)
-		std::cout << GREEN << "Client connected from " << newClient.getSocket() << RESET << std::endl;
 	return (0);
 }
 
@@ -114,9 +107,7 @@ int	Server::sendToClient(const std::string& message, const Client& client) const
 		std::cerr << RED << "Error sending message" << RESET << std::endl;
 		return (-1);
 	}
-	else
-		if (DEBUG)
-			std::cout << GREEN << "Sent: " << message << " to " << client.getNickname() << " socket " << client.getSocket() << RESET << std::endl;
+	std::cout << GREEN << "Sent: " << message << " to " << client.getNickname() << RESET << std::endl;
 	return (0);
 }
 
@@ -128,17 +119,15 @@ int	Server::receiveFromClient(Client& sender)
 	int		bytes = recv(sender.getSocket(), buffer, BUFFER_SIZE, 0);
 	if (bytes > 0)
 	{
+		std::cout << GREEN << "Received: " << buffer << " from " << sender.getNickname() << RESET << std::endl;
 		buffer[bytes] = '\0';
 		std::string	bufferStr(buffer);
-		if (DEBUG)
-			std::cout << GREEN << "Received: " << bufferStr << " from " << sender.getNickname() << " socket " << sender.getSocket() << RESET << std::endl;
-
 		parseCommand(bufferStr, sender);
 		return (bytes);
 	}
 	else {
 		std::cout << RED << "Client disconnected" << RESET << std::endl;
-		std::string	message = "User has been disconnected";
+		std::string	message = "User has disconnected";
 		quit(sender, message);
 		clearEmptyChannels();
 	}
@@ -148,30 +137,15 @@ int	Server::receiveFromClient(Client& sender)
 void	Server::closeSockets()
 {
 	for (size_t i = 0; i < _clients.size(); i++)
-	{
-		if (DEBUG)
-			std::cout << RED << "Closing socket" << RESET << std::endl;
 		close(_clients[i].getSocket());
-	}
 	if (_socket != -1)
-	{
-		if (DEBUG)
-			std::cout << RED << "Closing server socket" << RESET << std::endl;
-		close(_socket);
-	}
+		_socket = close(_socket);
 }
 
 Client*	Server::findClient(const std::string& nick)
 {
-	if (DEBUG)
-	{
-		std::cout << "getClient: " << nick << std::endl;
-		std::cout << "clients.size(): " << _clients.size() << std::endl;
-	}
 	for (size_t i = 0; i < _clients.size(); i++)
 	{
-		if (DEBUG)
-			std::cout << "clients[i].getNickname(): " << _clients[i].getNickname() << std::endl;
 		if (nick == _clients[i].getNickname())
 			return (&_clients[i]);
 	}

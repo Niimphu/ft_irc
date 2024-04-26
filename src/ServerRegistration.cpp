@@ -64,7 +64,7 @@ int	Server::setUsername(std::string& user, Client& client)
 void	Server::registerClient(Client& client) const {
 	if (!client.isRegistered() && !client.getNickname().empty() && !client.getUsername().empty()) {
 		client.beRegistered();
-		std::cout << "New user registered: Nickname: " << client.getNickname() << " Username: " << client.getUsername() << std::endl;
+		std::cout << "New user " << client.getNickname() << " has been registered" << std::endl;
 		sendToClient(buildReply(SERVER, client.getNickname(), 001, "", 0), client);
 	}
 }
