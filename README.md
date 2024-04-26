@@ -11,7 +11,7 @@ In this project, we are tasked with developing an IRC server in C++98 standard t
 The subject brief specifies that, as well as handling a certain set of commands, the server should also:
  - use one call to poll()
  - never hang
- - only have non-block I/O
+ - only have non-blocking I/O
  - use TCP/IP server-client connections
 
 For the project, we developed an IRC server that can be started from terminal with `./ircserv <port> <password>`, and then from there, it handles all incoming requests from HexChat.
