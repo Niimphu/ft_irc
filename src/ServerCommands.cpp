@@ -101,6 +101,14 @@ int	Server::channelTopic(const std::string& channelName,const std::string& newTo
 	return (0);
 }
 
+int	Server::mode(const std::string& channelName, const std::string& modeString, const std::string &arg,  Client &client)
+{
+	Channel*	channel = findChannel(channelName);
+	if (!channel)
+		return (sendToClient(buildReply(SERVER, client.getNickname(), 403, "", 0), client));
+	return (channel->mode(modeString, arg, client));
+}
+
 int	Server::kickClient(const std::string& channelName,const std::string& target, const std::string& reason, Client& client)
 {
 	Channel		*channel = findChannel(channelName);

@@ -54,6 +54,7 @@ class Server
 		int		ChannelMessage(std::string&, std::string&, Client& client);
 		void	names(Client& client, std::string& channelName);
 		int		channelTopic(const std::string& channel,const std::string& newTopic, Client& client);
+		int		mode(const std::string& channelName, const std::string& modeString, const std::string &arg,  Client &client);
 		int		kickClient(const std::string& channelName, const std::string& target, const std::string& reason, Client& client);
 		int		partChannel(const std::string&, const std::string&, Client&);
 		int		quit(Client& client, std::string& quitMessage);
