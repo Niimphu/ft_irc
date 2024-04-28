@@ -82,7 +82,7 @@ void	Server::parseCommand(const std::string& clientPackage, Client& client) {
 				break;
 			}
 			case MODE: {
-				findChannel(parameter)->mode(parameter2, parameter3 ,client);
+				mode(parameter, parameter2, parameter3, client);
 				break;
 			}
 			default: {
